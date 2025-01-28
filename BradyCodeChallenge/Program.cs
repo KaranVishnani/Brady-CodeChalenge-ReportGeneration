@@ -95,8 +95,9 @@ namespace BradyCodeChallenge.Models
             log.Info("starting File Monitoring.");
             _fileMonitor.Start();
 
-            // TODO: need to remove or move somewhere else for project run
-            File.Copy("C:\\BradyCodeChallenge\\01-Basic.xml", "C:\\BradyCodeChallenge\\input\\01-Basic.xml", true);
+            // TODO: Purpose of this line is testing the complete process of report generation, otherwise will keep on waiting for file.
+            // MUST NOT BE PRESENT ON PROD.
+            // File.Copy(".\\ReferenceData\\01-Basic.xml", "C:\\BradyCodeChallenge\\input\\01-Basic.xml", true);
         }
 
         private void OnFileCreated(object sender, FileSystemEventArgs args)
@@ -177,6 +178,7 @@ namespace BradyCodeChallenge.Models
         {
             log.Info("Saving Result Report.");
             _processor.SaveResultReport(GetOutputFileFullName(), _reportOutput);
+            log.Info("Result Report generated.");
         }
 
         private string GetOutputFileFullName()

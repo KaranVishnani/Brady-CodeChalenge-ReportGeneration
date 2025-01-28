@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="log4net.xml" />
+    <None Remove="ReferenceData\ReferenceData.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,12 @@
   <ItemGroup>
     <PackageReference Include="log4net" Version="3.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ReferenceData\ReferenceData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
