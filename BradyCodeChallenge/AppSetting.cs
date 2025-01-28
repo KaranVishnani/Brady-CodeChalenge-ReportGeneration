@@ -4,10 +4,10 @@ namespace BradyCodeChallenge
 {
     public static class AppSetting
     {
-        public static string InputFilePath = "input";
-        public static string outputFilePath = "output";
-        public static string InputFileFilter = "inputFileRegexPattern";
-        public static string ReferenceDataFile = "referenceData";
+        public const string InputFilePath = "input";
+        public const string outputFilePath = "output";
+        public const string InputFileFilter = "inputFileRegexPattern";
+        public const string ReferenceDataFile = "referenceData";
 
         public static string GetAppSettingValue(string key)
         {
