@@ -21,8 +21,8 @@ namespace BradyCodeChallenge.Models
         private IFileMonitor _fileMonitor;
         private IFileParser _fileParser;
 
+        private readonly ReferenceData _referenceData;
         private FileProcessor _processor;
-        private ReferenceData _referenceData;
         private GenerationReport _report;
         private GenerationOutput _reportOutput;
 
@@ -52,6 +52,10 @@ namespace BradyCodeChallenge.Models
             _referenceDataFile = AppSetting.GetAppSettingValue(AppSetting.ReferenceDataFile);
             
             InitialiseFields();
+
+            log.Debug("Loading ReferenceData.");
+            _referenceData = _processor.LoadFile<ReferenceData>(_referenceDataFile) ??
+                throw new Exception($"ReferenceData object is null.");
         }
 
         public static void Main(string[] args)
@@ -86,8 +90,6 @@ namespace BradyCodeChallenge.Models
             _processor = new FileProcessor(_fileParser, log);
 
             InitialiseFileMonitor();
-
-            InitialiseReferenceData();
         }
 
         private void StartFileMonitoring()
@@ -128,13 +130,6 @@ namespace BradyCodeChallenge.Models
         private IFileParser GetFileParserObject()
         {
             return new XmlFileParser(log);
-        }
-
-        private void InitialiseReferenceData()
-        {
-            log.Debug("Loading ReferenceData.");
-            _referenceData = _processor.LoadFile<ReferenceData>(_referenceDataFile) ??
-                throw new Exception($"ReferenceData object is null.");
         }
 
         private void LoadReportData(string inputFile)
